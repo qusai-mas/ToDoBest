@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>jQuery &amp; Bootstrap Pomodoro Timer</title>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<link rel="stylesheet" href="css/style.css">
+  <link href="css/pomodoro-timer.css" rel="stylesheet">
+  
+  <style>
+  body { background-color:#255df1;}
+  .panel {
+    margin-bottom: 20px;
+    background-color: #6089f6;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+.btn {
+    padding: 11px 16px;
+    cursor: pointer;
+    border-width: 1px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 400;
+    -webkit-box-shadow: 0px 10px 20px -6px rgb(0 0 0 / 12%);
+    -moz-box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 10px 20px -6px rgb(0 0 0 / 12%);
+	color: white;
+
+}
+
+
+
+  </style>
+  
+</head>
+
+<body>
+<script>
+
+var loggedin = sessionStorage.getItem("emaail");
+        if (loggedin == null) {
+          alert("please log in")
+          window.location.href="localhost:8080/signin.html";
+        } else {
+
+            }
+
+</script>
+<button id="Home"  class="btn btn-primary mr-md-3 mb-md-0 mb-2"  title="" type="button"> ... Home ... </button>
+<button   id="about us" onclick="myFunction()"  class="btn btn-primary mr-md-3 mb-md-0 mb-2" href=" " title="" type="button"> ... About us ...  </button>
+<button id="signout" onclick="sessionStorage.clear();" class="btn btn-primary mr-md-3 mb-md-0 mb-2" href=" " title="" type="button">   ... Sign out ...  </button>
+
+  <div class="container" style="margin-top:90px;">
+   
+    <div class="panel panel-default">
+	    <div class="page-header">
+     
+      <h2 class="text-center">
+        <span>
+		            <div class="dropdown d-inline-block">
+						  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href=" " title="The Pomodoro Technique is created by Francesco Cirillo for a more productive way to work and study. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks. Each interval is known as a pomodoro, from the Italian word for 'tomato', after the tomato-shaped kitchen timer that Cirillo used as a university student. - Wikipedia
+
+How to use the Pomodoro Timer?
+Add tasks to work on today
+Set estimate pomodoros (1 = 25min of work) for each tasks
+Select a task to work on
+Start timer and focus on the task for 25 minutes
+Take a break for 5 minutes when the alarm ring
+Iterate 3-5 until you finish the tasks">Pomodoro method  </button> 
+						  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+						    <a class="dropdown-item" type="submit" onclick="onPomodoroTimer()" >Pomodoro</a>
+						    <a class="dropdown-item" type="submit" onclick="onShortTimer()">Short Break</a>
+						    <a class="dropdown-item" class="btn btn-outline-primary"type="submit" onclick="onLongTimer()">Long Break</a>
+						  </div>
+						</div>
+						            <div class="dropdown d-inline-block">
+						  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href=" " title="A tock is a 45-minute work chunk that goes a little bit further than the pomodoro method and actively encourages users to write down their distractions while they go about working on whatever goal it is they’ve set.
+
+That way, according to Danny, it’s creator, you don’t have to “juggle all the other things your brain wants to think about.” As well as having a handy list of other things to work on come break time.">
+						   Tocks </button>
+						  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+						    <a class="dropdown-item" type="submit" onclick="onTockTimer()" >Tock</a>
+						    <a class="dropdown-item" type="submit" onclick="onShortTimer()">Short Break</a>
+						    <a class="dropdown-item" class="btn btn-outline-primary"type="submit" onclick="onLongTimer()">Long Break</a>
+						  </div>
+						</div>
+						            <div class="dropdown d-inline-block">
+						  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href=" " title="This is a method dreamed up by Julia Gifford who wrote about her findings in The Muse in relation to a study charting productivity in the workplace.
+
+Using a time-tracking app and monitoring the habits of the most productive employees, Gifford’s team found that the most productive “work for 52 minutes at a time, then take breaks for 17 minutes before getting back to it.">
+						    52/17 </button>
+						  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+						    <a class="dropdown-item" type="submit" onclick="on52Timer()" >52</a>
+						    <a class="dropdown-item" type="submit" onclick="on17Timer()">17</a>
+					
+						  </div>
+						</div>
+						<button id="twominButton"  class="btn btn-primary mr-md-3 mb-md-0 mb-2" href=" " title="The 2 minute rule is all about coming to terms with your mental resistance and accepting the fact that sometimes you’re just feeling lazy and not up to the task.
+
+The way it works is that you decide to commit to a task for just two minutes. No matter how much you resent or dread doing the thing in question.
+
+Once those two minutes are up? You can then decide what to do next.
+
+This is a nice mental trick that forces you into taking action by selling yourself on the idea that you’ll work for just a short amount of time. Thus capitalising on the idea that you’ll continue anyway and go for longer. Having mustered up the energy and taken the first steps in the first place." type="button" onclick="twominrule()">Two minutes rule</button>
+
+		
+
+        </span>
+      </h2>
+    </div>
+      <div class="panel-body text-center">
+        <div class="timer-time timer-container">
+          <div class="timer-time-set timer-box" id="currentTime">
+            <span id="hoursValue">00</span><span>:</span><span id="minutesValue">00</span><span>:</span><span id="secondsValue">00</span>
+          </div>
+          <div class="timer-time-set timer-box" id="nextTime">
+            <span id="hoursNext">00</span><span>:</span><span id="minutesNext">00</span><span>:</span><span id="secondsNext">00</span>
+          </div>
+        </div>
+        <div>
+          <button id="restartButton" class="btn btn-warning btn-lg" type="submit" onclick="onResetTimer()">
+            <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> Reset
+          </button>
+          <button id="startButton" class="btn btn-primary btn-lg" type="submit" onclick="onStartTimer()">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start
+          </button>
+          <button id="stopButton" class="btn btn-danger btn-lg" type="submit" onclick="onStopTimer()">
+            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop
+          </button>
+        </div>
+      </div>
+
+    </div>
+  <div id="myDIV" class="header">
+  <h2>My To Do List\distractions</h2>
+  <input type="text" id="myInput"  placeholder="what do you want to work on?/what is distracting you?">
+  <span onclick="newElement()"   class="addBtn">Add</span>
+</div>
+
+<ul id="myUL">
+
+</ul>
+ </div>
+  
+
+  
+  </div>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+ <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="js/pomodoro-timer.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+ <script> var emaaail =sessionStorage.getItem("emaail"); </script>
+<script>
+function postApi(val){
+var model = {
+		"email" :  this.$("#emaaail").val(),
+
+"task" : this.$("#id").val(),
+};
+console.log("post data:"+model);
+	$.ajax(
+	{
+		type:"POST",
+		url : "/jpa/users/"+email+"/todos",
+		
+		ContentType:"application/json ;charset=UTF-8",
+		
+		crossOrigin:true,
+		dataType:"json",
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+			},
+		data:this.JSON.stringify(model),
+		
+		success:function(data)
+		{
+			console.log("successfuly"+data);
+			alert("done");
+
+		},
+		error:function(jqXHR,testStatus,errorThrown)
+		{
+			alert("error");
+		}
+	});
+}
+function addTodo() {
+console.log("utiutit");
+	var data = new FormData;
+	data.append("username",sessionStorage.getItem("emaail"));
+	data.append("Task",document.getElementById("myInput").value);
+
+		fetch('/jpa/users/todos', {
+	    method: 'POST',
+	    body: data,
+
+	})
+	.then((response) => { 
+            return response.json().then((data) => {
+                console.log("true");
+            }).catch((err) => {
+                console.log(err);
+            }) 
+        });
+
+	
+	}
+	function myFunction() {
+        window.location.href = "WebSite452208%20(1)/Contact-1.html";
+	}
+</script>
+
+</body>
+</html>
